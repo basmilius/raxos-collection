@@ -13,6 +13,8 @@ use function array_column;
 use function array_diff;
 use function array_filter;
 use function array_is_list;
+use function array_key_first;
+use function array_key_last;
 use function array_keys;
 use function array_map;
 use function array_merge;
@@ -27,7 +29,6 @@ use function count;
 use function in_array;
 use function is_array;
 use function is_callable;
-use function is_null;
 use function shuffle;
 use function usort;
 use const ARRAY_FILTER_USE_BOTH;
@@ -118,7 +119,7 @@ trait ArrayListable
     public function contains(mixed $item): bool
     {
         if (is_callable($item)) {
-            return !is_null($this->first($item));
+            return $this->first($item) !== null;
         }
 
         return in_array($item, $this->data, true);
@@ -185,11 +186,17 @@ trait ArrayListable
      */
     public function first(?callable $predicate = null, mixed $default = null): mixed
     {
-        if ($predicate === null) {
-            return count($this->data) > 0 ? ArrayUtil::first($this->data) : $default;
-        }
-
         return ArrayUtil::first($this->data, $predicate, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 2.0.0
+     */
+    public function firstKey(): string|int|null
+    {
+        return array_key_first($this->data);
     }
 
     /**
@@ -222,7 +229,7 @@ trait ArrayListable
      */
     public function isEmpty(): bool
     {
-        return count($this->data) === 0;
+        return empty($this->data);
     }
 
     /**
@@ -232,7 +239,7 @@ trait ArrayListable
      */
     public function isNotEmpty(): bool
     {
-        return count($this->data) > 0;
+        return !empty($this->data);
     }
 
     /**
@@ -242,9 +249,7 @@ trait ArrayListable
      */
     public function keys(): static
     {
-        $keys = array_keys($this->data);
-
-        return new self($keys);
+        return new self(array_keys($this->data));
     }
 
     /**
@@ -266,6 +271,16 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
+    public function lastKey(): string|int|null
+    {
+        return array_key_last($this->data);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 2.0.0
+     */
     public function map(callable $fn): static
     {
         return new static(array_map($fn, $this->data));
@@ -276,7 +291,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function merge(self|ArrayableInterface|iterable $items): static
+    public function merge(ArrayableInterface|self|iterable $items): static
     {
         return new static(array_merge($this->data, ArrayUtil::ensureArray($items)));
     }
