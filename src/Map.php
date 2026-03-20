@@ -42,9 +42,9 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function get(string $key): mixed
+    public function get(string $key, mixed $default = null): mixed
     {
-        return $this->data[$key] ?? null;
+        return $this->data[$key] ?? $default;
     }
 
     /**

@@ -7,6 +7,8 @@ use JsonSerializable;
 use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Raxos\Contract\Collection\{ArrayListInterface, CollectionExceptionInterface, ValidatedArrayListInterface};
 use Traversable;
+use function array_is_list;
+use function array_values;
 use function is_subclass_of;
 use function iterator_to_array;
 
@@ -91,7 +93,11 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
         if ($items instanceof self) {
             $items = $items->data;
         } elseif ($items instanceof Traversable) {
-            $items = iterator_to_array($items, false);
+            $items = iterator_to_array($items);
+        }
+
+        if (array_is_list($items)) {
+            $items = array_values($items);
         }
 
         if (is_subclass_of($implementation, ValidatedArrayListInterface::class)) {

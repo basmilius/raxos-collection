@@ -28,7 +28,7 @@ trait ArrayListAccessible
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->data[$offset]);
     }
@@ -38,7 +38,7 @@ trait ArrayListAccessible
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->data[$offset];
     }
@@ -49,7 +49,7 @@ trait ArrayListAccessible
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if ($this instanceof ReadonlyArrayList) {
             throw new CollectionImmutableException();
@@ -64,7 +64,7 @@ trait ArrayListAccessible
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         if ($this instanceof ReadonlyArrayList) {
             throw new CollectionImmutableException();

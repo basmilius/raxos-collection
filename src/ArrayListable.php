@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Raxos\Collection;
 
 use Raxos\Contract\Collection\{ArrayableInterface, ArrayListInterface};
-use Raxos\Database\Orm\Model;
 use Raxos\Foundation\Util\ArrayUtil;
 use function array_all;
 use function array_any;
@@ -29,6 +28,8 @@ use function count;
 use function in_array;
 use function is_array;
 use function is_callable;
+use function is_object;
+use function method_exists;
 use function shuffle;
 use function usort;
 use const ARRAY_FILTER_USE_BOTH;
@@ -249,7 +250,7 @@ trait ArrayListable
      */
     public function keys(): static
     {
-        return new self(array_keys($this->data));
+        return new static(array_keys($this->data));
     }
 
     /**
@@ -308,7 +309,7 @@ trait ArrayListable
                 return ArrayUtil::only($item, $keys);
             }
 
-            if ($item instanceof Model) {
+            if (is_object($item) && method_exists($item, 'only')) {
                 return $item->only($keys);
             }
 
