@@ -6,6 +6,7 @@ namespace Raxos\Collection;
 use ArrayAccess;
 use ArrayIterator;
 use Raxos\Collection\Error\CollectionImmutableException;
+use Raxos\Contract\Collection\ValidatedArrayListInterface;
 use Traversable;
 use function count;
 
@@ -55,7 +56,15 @@ trait ArrayListAccessible
             throw new CollectionImmutableException();
         }
 
-        $this->data[$offset] = $value;
+        if ($this instanceof ValidatedArrayListInterface) {
+            static::validateItem($value);
+        }
+
+        if ($offset === null) {
+            $this->data[] = $value;
+        } else {
+            $this->data[$offset] = $value;
+        }
     }
 
     /**

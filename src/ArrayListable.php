@@ -53,11 +53,11 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function chunk(int $size): static
+    public function chunk(int $size): ArrayListInterface
     {
         $chunks = array_chunk($this->data, $size);
 
-        return new static(array_map(static fn(array $chunk) => new static($chunk), $chunks));
+        return $this->transformed(array_map(static fn(array $chunk) => new static($chunk), $chunks));
     }
 
     /**
@@ -75,7 +75,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function collapse(): static
+    public function collapse(): ArrayListInterface
     {
         $result = [];
 
@@ -93,7 +93,7 @@ trait ArrayListable
             }
         }
 
-        return new static($result);
+        return $this->transformed($result);
     }
 
     /**
@@ -101,7 +101,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function column(string|int ...$columns): static
+    public function column(string|int ...$columns): ArrayListInterface
     {
         $result = $this->data;
 
@@ -109,7 +109,7 @@ trait ArrayListable
             $result = array_column($result, $column);
         }
 
-        return new static($result);
+        return $this->transformed($result);
     }
 
     /**
@@ -120,7 +120,7 @@ trait ArrayListable
     public function contains(mixed $item): bool
     {
         if (is_callable($item)) {
-            return $this->first($item) !== null;
+            return array_any($this->data, $item);
         }
 
         return in_array($item, $this->data, true);
@@ -205,7 +205,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function groupBy(callable $fn): static
+    public function groupBy(callable $fn): ArrayListInterface
     {
         $groups = [];
         $isList = array_is_list($this->data);
@@ -220,7 +220,7 @@ trait ArrayListable
             }
         }
 
-        return new static(array_map(static fn(array $group) => new static($group), $groups));
+        return $this->transformed(array_map(static fn(array $group) => new static($group), $groups));
     }
 
     /**
@@ -248,9 +248,9 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function keys(): static
+    public function keys(): ArrayListInterface
     {
-        return new static(array_keys($this->data));
+        return $this->transformed(array_keys($this->data));
     }
 
     /**
@@ -282,9 +282,9 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function map(callable $fn): static
+    public function map(callable $fn): ArrayListInterface
     {
-        return new static(array_map($fn, $this->data));
+        return $this->transformed(array_map($fn, $this->data));
     }
 
     /**
@@ -302,7 +302,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function only(array $keys): static
+    public function only(array $keys): ArrayListInterface
     {
         return $this->map(static function (mixed $item) use ($keys) {
             if (is_array($item)) {
@@ -400,7 +400,7 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function splice(int $offset = 0, int $length = 0, ...$replacement): static
+    public function splice(int $offset = 0, int $length = 0, mixed ...$replacement): static
     {
         $data = $this->data;
 
@@ -427,6 +427,19 @@ trait ArrayListable
     public function values(): static
     {
         return new static(array_values($this->data));
+    }
+
+    /**
+     * Type-changing operations return an unvalidated collection.
+     *
+     * @param array $data
+     * @return ArrayListInterface
+     * @author Bas Milius <bas@mili.us>
+     * @since 3.2.0
+     */
+    private function transformed(array $data): ArrayListInterface
+    {
+        return $this instanceof ReadonlyArrayList ? new ReadonlyArrayList($data) : new ArrayList($data);
     }
 
 }

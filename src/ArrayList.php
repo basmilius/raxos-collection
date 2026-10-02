@@ -4,14 +4,13 @@ declare(strict_types=1);
 namespace Raxos\Collection;
 
 use JsonSerializable;
-use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Raxos\Contract\Collection\{ArrayListInterface, MutableArrayListInterface, ValidatedArrayListInterface};
+use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Traversable;
 use function array_is_list;
 use function array_pop;
 use function array_shift;
 use function array_values;
-use function is_subclass_of;
 use function iterator_to_array;
 
 /**
@@ -44,7 +43,14 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public final function __construct(
         protected array $data = []
-    ) {}
+    )
+    {
+        if ($this instanceof ValidatedArrayListInterface) {
+            foreach ($data as $item) {
+                static::validateItem($item);
+            }
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -53,6 +59,10 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public function append(mixed $item): void
     {
+        if ($this instanceof ValidatedArrayListInterface) {
+            static::validateItem($item);
+        }
+
         $this->data[] = $item;
     }
 
@@ -73,6 +83,10 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public function prepend(mixed $item): void
     {
+        if ($this instanceof ValidatedArrayListInterface) {
+            static::validateItem($item);
+        }
+
         $this->data = [$item, ...$this->data];
     }
 
@@ -113,6 +127,12 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public function __unserialize(array $data): void
     {
+        if ($this instanceof ValidatedArrayListInterface) {
+            foreach ($data as $item) {
+                static::validateItem($item);
+            }
+        }
+
         $this->data = $data;
     }
 
@@ -123,8 +143,6 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public static function of(iterable $items): static
     {
-        $implementation = static::class;
-
         if ($items instanceof self) {
             $items = $items->data;
         } elseif ($items instanceof Traversable) {
@@ -133,12 +151,6 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
         if (array_is_list($items)) {
             $items = array_values($items);
-        }
-
-        if (is_subclass_of($implementation, ValidatedArrayListInterface::class)) {
-            foreach ($items as $item) {
-                $implementation::validateItem($item);
-            }
         }
 
         return new static($items);

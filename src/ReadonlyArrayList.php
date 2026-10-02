@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace Raxos\Collection;
 
 use JsonSerializable;
-use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Raxos\Contract\Collection\{ArrayListInterface, CollectionExceptionInterface, ValidatedArrayListInterface};
+use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Traversable;
 use function array_is_list;
 use function array_values;
-use function is_subclass_of;
 use function iterator_to_array;
 
 /**
@@ -41,7 +40,14 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
      */
     public final function __construct(
         protected array $data = []
-    ) {}
+    )
+    {
+        if ($this instanceof ValidatedArrayListInterface) {
+            foreach ($data as $item) {
+                static::validateItem($item);
+            }
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -70,6 +76,12 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
      */
     public function __unserialize(array $data): void
     {
+        if ($this instanceof ValidatedArrayListInterface) {
+            foreach ($data as $item) {
+                static::validateItem($item);
+            }
+        }
+
         $this->data = $data;
     }
 
@@ -88,8 +100,6 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
      */
     public static function of(iterable $items): static
     {
-        $implementation = static::class;
-
         if ($items instanceof self) {
             $items = $items->data;
         } elseif ($items instanceof Traversable) {
@@ -98,12 +108,6 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
 
         if (array_is_list($items)) {
             $items = array_values($items);
-        }
-
-        if (is_subclass_of($implementation, ValidatedArrayListInterface::class)) {
-            foreach ($items as $item) {
-                $implementation::validateItem($item);
-            }
         }
 
         return new static($items);
