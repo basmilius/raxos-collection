@@ -36,9 +36,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
      */
     public function __construct(
         protected array $data = []
-    )
-    {
-    }
+    ) {}
 
     /**
      * {@inheritdoc}

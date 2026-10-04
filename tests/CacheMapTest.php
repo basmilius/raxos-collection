@@ -12,9 +12,10 @@ it('does not cache a failed factory and retries it on the next call', function (
         if (++$calls === 1) {
             throw new RuntimeException('temporary');
         }
+
         return 'success';
     };
-    expect(fn () => $map->remember('unit', $factory))->toThrow(RuntimeException::class)->and($map->has('unit'))->toBeFalse()
+    expect(fn() => $map->remember('unit', $factory))->toThrow(RuntimeException::class)->and($map->has('unit'))->toBeFalse()
         ->and($map->remember('unit', $factory))->toBe('success')->and($map->remember('unit', $factory))->toBe('success')
         ->and($calls)->toBe(2);
     $map->unset('unit');

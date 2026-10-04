@@ -38,9 +38,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
      */
     public function __construct(
         protected array $data = []
-    )
-    {
-    }
+    ) {}
 
     /**
      * Returns the fallback for a missing key or a stored null; has() distinguishes those cases.
@@ -48,6 +46,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
      * @template TDefault
      * @param string $key
      * @param TDefault $default
+     *
      * @return TValue|TDefault
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0

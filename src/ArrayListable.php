@@ -150,6 +150,7 @@ trait ArrayListable
      * Invokes the callback in collection order without creating a replacement collection.
      *
      * @param callable(TValue, TKey):void $fn
+     *
      * @return $this
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
@@ -452,6 +453,7 @@ trait ArrayListable
      * Type-changing operations return an unvalidated collection.
      *
      * @param array $data
+     *
      * @return ArrayListInterface
      * @author Bas Milius <bas@mili.us>
      * @since 3.2.0

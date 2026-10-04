@@ -41,15 +41,14 @@ final class LazySequence implements IteratorAggregate
      *
      * @param Closure():iterable<TKey, TValue> $factory
      * @param bool $repeatable
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
      */
     private function __construct(
         private readonly Closure $factory,
         private readonly bool $repeatable
-    )
-    {
-    }
+    ) {}
 
     /**
      * Defers source access. Arrays and factories are repeatable; Iterator inputs can be consumed once.
@@ -57,6 +56,7 @@ final class LazySequence implements IteratorAggregate
      * @template K of array-key
      * @template V
      * @param iterable<K, V>|callable():iterable<K, V> $source
+     *
      * @return self<K, V>
      * @throws InvalidArgumentException
      * @author Bas Milius <bas@mili.us>
@@ -100,6 +100,7 @@ final class LazySequence implements IteratorAggregate
      *
      * @template TResult
      * @param callable(TValue, TKey):TResult $fn
+     *
      * @return self<TKey, TResult>
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
@@ -117,6 +118,7 @@ final class LazySequence implements IteratorAggregate
      * Retains matching entries without buffering the source or changing their keys.
      *
      * @param callable(TValue, TKey):bool $predicate
+     *
      * @return self<TKey, TValue>
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
@@ -136,6 +138,7 @@ final class LazySequence implements IteratorAggregate
      * Stops after the requested number of values without advancing the source to the next value.
      *
      * @param int $count
+     *
      * @return self<TKey, TValue>
      * @throws InvalidArgumentException
      * @author Bas Milius <bas@mili.us>
@@ -168,6 +171,7 @@ final class LazySequence implements IteratorAggregate
      * Buffers at most one chunk and emits any remaining values as a final partial chunk.
      *
      * @param int $size
+     *
      * @return self<int, list<TValue>>
      * @throws InvalidArgumentException
      * @author Bas Milius <bas@mili.us>
@@ -201,6 +205,7 @@ final class LazySequence implements IteratorAggregate
      * Consumes the sequence immediately and passes each value and its source key to the callback.
      *
      * @param callable(TValue, TKey):void $fn
+     *
      * @return void
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
@@ -216,6 +221,7 @@ final class LazySequence implements IteratorAggregate
      * Materializes the remaining sequence; disabling key preservation retains duplicate-key values.
      *
      * @param bool $preserveKeys
+     *
      * @return array<TKey, TValue>|list<TValue>
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0

@@ -24,6 +24,7 @@ final readonly class CursorPage implements JsonSerializable
      * @param ArrayListInterface<int, TValue> $items
      * @param string|null $nextCursor
      * @param bool $hasMore
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 3.3.0
      */
@@ -31,9 +32,7 @@ final readonly class CursorPage implements JsonSerializable
         public ArrayListInterface $items,
         public ?string $nextCursor,
         public bool $hasMore
-    )
-    {
-    }
+    ) {}
 
     /**
      * Uses the same snake-case continuation fields as the generated API schema.

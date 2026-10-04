@@ -60,6 +60,7 @@ it('caches null and false without rerunning a value factory', function (mixed $v
     $count = 0;
     $factory = static function () use (&$count, $value): mixed {
         ++$count;
+
         return $value;
     };
     expect($map->remember('key', $factory))->toBe($value)
