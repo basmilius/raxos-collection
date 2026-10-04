@@ -28,6 +28,7 @@ use function count;
  */
 class Map implements DebuggableInterface, MapInterface, MutableMapInterface, JsonSerializable, SerializableInterface
 {
+
     /**
      * Map constructor.
      *
@@ -61,6 +62,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -71,6 +73,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -84,6 +87,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -94,6 +98,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -110,6 +115,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -120,6 +126,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -130,6 +137,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -140,6 +148,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -150,6 +159,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -160,6 +170,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -170,6 +181,7 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -177,4 +189,5 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
     {
         $this->data = $data;
     }
+
 }

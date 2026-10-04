@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Raxos\Collection\Error\CollectionImmutableException;
 use Raxos\Collection\ReadonlyArrayList;
 
 covers(ReadonlyArrayList::class);
@@ -9,7 +10,7 @@ it('keeps transformed collections immutable', function (): void {
     $list = new ReadonlyArrayList([1]);
     $mapped = $list->map(static fn(int $value): string => (string)$value);
     expect($mapped)->toBeInstanceOf(ReadonlyArrayList::class)->and($mapped->toArray())->toBe(['1'])
-        ->and(fn() => $mapped[] = '2')->toThrow(Raxos\Collection\Error\CollectionImmutableException::class);
+        ->and(fn() => $mapped[] = '2')->toThrow(CollectionImmutableException::class);
 });
 
 it('creates independent immutable copies from all iterable forms', function (): void {

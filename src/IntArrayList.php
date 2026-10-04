@@ -34,6 +34,7 @@ class IntArrayList extends ArrayList implements ValidatedArrayListInterface
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */

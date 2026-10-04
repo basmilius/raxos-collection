@@ -26,6 +26,7 @@ use function count;
  */
 readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSerializable, SerializableInterface
 {
+
     /**
      * Map constructor.
      *
@@ -40,6 +41,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -50,6 +52,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -60,6 +63,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -70,6 +74,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -80,6 +85,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -90,6 +96,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -100,6 +107,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -110,6 +118,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -120,6 +129,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -130,6 +140,7 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -137,4 +148,5 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
     {
         $this->data = $data;
     }
+
 }

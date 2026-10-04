@@ -48,6 +48,7 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -58,6 +59,7 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -68,6 +70,7 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -105,4 +108,5 @@ readonly class ReadonlyArrayList implements ArrayListInterface, DebuggableInterf
 
         return new static($data);
     }
+
 }

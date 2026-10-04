@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Raxos\Collection\{ArrayList, IntArrayList};
 use Raxos\Collection\Error\CollectionInvalidTypeException;
-use Raxos\Collection\IntArrayList;
 
 covers(IntArrayList::class);
 
@@ -11,7 +11,7 @@ it('appends sequentially through array access and keeps type-changing transforms
     $list[] = 2;
     $list[] = 3;
     expect($list->toArray())->toBe([1, 2, 3])->and(json_encode($list))->toBe('[1,2,3]')
-        ->and($list->map(static fn(int $value): string => (string)$value))->toBeInstanceOf(Raxos\Collection\ArrayList::class)
+        ->and($list->map(static fn(int $value): string => (string)$value))->toBeInstanceOf(ArrayList::class)
         ->and($list->map(static fn(int $value): string => (string)$value)->toArray())->toBe(['1', '2', '3'])
         ->and($list->chunk(2)->first())->toBeInstanceOf(IntArrayList::class)
         ->and($list->groupBy(static fn(int $value): int => $value % 2)->count())->toBe(2)

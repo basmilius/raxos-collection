@@ -53,6 +53,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -67,6 +68,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -77,6 +79,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -91,6 +94,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -101,6 +105,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -111,6 +116,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -121,6 +127,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -137,6 +144,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -150,4 +158,5 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
 
         return new static($data);
     }
+
 }

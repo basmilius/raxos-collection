@@ -29,10 +29,12 @@ it('preserves associative keys inside groups while exposing collection keys sepa
 
 it('collapses nested lists and projects objects that provide only', function (): void {
     $object = new class {
+
         public function only(array $keys): array
         {
             return array_intersect_key(['a' => 1, 'b' => 2], array_flip($keys));
         }
+
     };
     expect(new ArrayList([new ArrayList([1, 2]), [3], 4])->collapse()->toArray())->toBe([1, 2, 3, 4])
         ->and(new ArrayList([$object])->only(['a'])->toArray())->toBe([['a' => 1]]);

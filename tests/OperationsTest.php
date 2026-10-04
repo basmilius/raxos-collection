@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use Raxos\Collection\Error\CollectionInvalidTypeException;
 use Raxos\Collection\{ArrayList, CacheMap, IntArrayList, Map, NumberArrayList, Paginated, ReadonlyArrayList, ReadonlyMap, StringArrayList};
+use Raxos\Collection\Error\CollectionInvalidTypeException;
 
 it('keeps value-preserving transforms independent and typed', function (): void {
     $list = new IntArrayList([3, 1, 2, 1]);

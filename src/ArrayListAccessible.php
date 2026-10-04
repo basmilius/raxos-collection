@@ -23,8 +23,10 @@ use function count;
  */
 trait ArrayListAccessible
 {
+
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -35,6 +37,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -45,6 +48,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @throws CollectionImmutableException
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
@@ -71,6 +75,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @throws CollectionImmutableException
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
@@ -86,6 +91,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -96,6 +102,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -106,6 +113,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -116,6 +124,7 @@ trait ArrayListAccessible
 
     /**
      * {@inheritdoc}
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -123,4 +132,5 @@ trait ArrayListAccessible
     {
         return $this->data;
     }
+
 }

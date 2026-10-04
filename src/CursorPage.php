@@ -18,6 +18,7 @@ use Raxos\Contract\Collection\ArrayListInterface;
  */
 final readonly class CursorPage implements JsonSerializable
 {
+
     /**
      * Carries a continuation only when another page is available; no total is calculated.
      *
@@ -45,4 +46,5 @@ final readonly class CursorPage implements JsonSerializable
     {
         return ['items' => $this->items, 'next_cursor' => $this->nextCursor, 'has_more' => $this->hasMore];
     }
+
 }

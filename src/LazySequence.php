@@ -27,6 +27,7 @@ use function iterator_to_array;
  */
 final class LazySequence implements IteratorAggregate
 {
+
     /**
      * Prevents a one-shot iterator from being silently reused after partial or complete iteration.
      *
@@ -230,4 +231,5 @@ final class LazySequence implements IteratorAggregate
     {
         return iterator_to_array($this, $preserveKeys);
     }
+
 }
