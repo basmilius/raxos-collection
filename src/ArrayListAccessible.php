@@ -23,7 +23,6 @@ use function count;
  */
 trait ArrayListAccessible
 {
-
     /**
      * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
@@ -50,14 +49,17 @@ trait ArrayListAccessible
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function offsetSet(mixed $offset, mixed $value): void
+    public function offsetSet(
+        mixed $offset,
+        mixed $value
+    ): void
     {
         if ($this instanceof ReadonlyArrayList) {
             throw new CollectionImmutableException();
         }
 
         if ($this instanceof ValidatedArrayListInterface) {
-            static::validateItem($value);
+            $this::validateItem($value);
         }
 
         if ($offset === null) {
@@ -121,5 +123,4 @@ trait ArrayListAccessible
     {
         return $this->data;
     }
-
 }

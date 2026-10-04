@@ -4,24 +4,23 @@ declare(strict_types=1);
 namespace Raxos\Collection;
 
 use JsonSerializable;
-use Raxos\Contract\Collection\{ArrayListInterface, MutableArrayListInterface, ValidatedArrayListInterface};
-use Raxos\Contract\{DebuggableInterface, SerializableInterface};
-use Traversable;
-use function array_is_list;
+use Raxos\Contract\Collection\ArrayListInterface;
+use Raxos\Contract\Collection\MutableArrayListInterface;
+use Raxos\Contract\Collection\ValidatedArrayListInterface;
+use Raxos\Contract\DebuggableInterface;
+use Raxos\Contract\SerializableInterface;
 use function array_pop;
 use function array_shift;
-use function array_values;
-use function iterator_to_array;
 
 /**
  * Class ArrayList
+ *
+ * Stores an eager mutable sequence while preserving keys and validating typed-list values.
  *
  * @template TKey of array-key
  * @template TValue
  * @implements ArrayListInterface<TKey, TValue>
  * @implements MutableArrayListInterface<TKey, TValue>
- * @mixin ArrayListable<TKey, TValue>
- * @mixin ArrayListAccessible<TKey, TValue>
  *
  * @author Bas Milius <bas@mili.us>
  * @package Raxos\Collection
@@ -47,7 +46,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
     {
         if ($this instanceof ValidatedArrayListInterface) {
             foreach ($data as $item) {
-                static::validateItem($item);
+                $this::validateItem($item);
             }
         }
     }
@@ -60,7 +59,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
     public function append(mixed $item): void
     {
         if ($this instanceof ValidatedArrayListInterface) {
-            static::validateItem($item);
+            $this::validateItem($item);
         }
 
         $this->data[] = $item;
@@ -84,7 +83,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
     public function prepend(mixed $item): void
     {
         if ($this instanceof ValidatedArrayListInterface) {
-            static::validateItem($item);
+            $this::validateItem($item);
         }
 
         $this->data = [$item, ...$this->data];
@@ -129,7 +128,7 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
     {
         if ($this instanceof ValidatedArrayListInterface) {
             foreach ($data as $item) {
-                static::validateItem($item);
+                $this::validateItem($item);
             }
         }
 
@@ -143,17 +142,12 @@ class ArrayList implements ArrayListInterface, MutableArrayListInterface, Debugg
      */
     public static function of(iterable $items): static
     {
-        if ($items instanceof self) {
-            $items = $items->data;
-        } elseif ($items instanceof Traversable) {
-            $items = iterator_to_array($items);
+        $data = [];
+
+        foreach ($items as $key => $value) {
+            $data[$key] = $value;
         }
 
-        if (array_is_list($items)) {
-            $items = array_values($items);
-        }
-
-        return new static($items);
+        return new static($data);
     }
-
 }

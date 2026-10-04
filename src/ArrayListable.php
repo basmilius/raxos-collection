@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Raxos\Collection;
 
-use Raxos\Contract\Collection\{ArrayableInterface, ArrayListInterface};
+use Raxos\Contract\Collection\ArrayableInterface;
+use Raxos\Contract\Collection\ArrayListInterface;
 use Raxos\Foundation\Util\ArrayUtil;
 use function array_all;
 use function array_any;
@@ -47,7 +48,6 @@ use const ARRAY_FILTER_USE_BOTH;
  */
 trait ArrayListable
 {
-
     /**
      * {@inheritdoc}
      * @author Bas Milius <bas@mili.us>
@@ -147,7 +147,10 @@ trait ArrayListable
     }
 
     /**
-     * {@inheritdoc}
+     * Invokes the callback in collection order without creating a replacement collection.
+     *
+     * @param callable(TValue, TKey):void $fn
+     * @return $this
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
@@ -185,7 +188,10 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function first(?callable $predicate = null, mixed $default = null): mixed
+    public function first(
+        ?callable $predicate = null,
+        mixed $default = null
+    ): mixed
     {
         return ArrayUtil::first($this->data, $predicate, $default);
     }
@@ -258,7 +264,10 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function last(?callable $predicate = null, mixed $default = null): mixed
+    public function last(
+        ?callable $predicate = null,
+        mixed $default = null
+    ): mixed
     {
         if ($predicate === null) {
             return count($this->data) > 0 ? ArrayUtil::last($this->data) : $default;
@@ -322,7 +331,10 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function reduce(callable $fn, mixed $initial = null): mixed
+    public function reduce(
+        callable $fn,
+        mixed $initial = null
+    ): mixed
     {
         return array_reduce($this->data, $fn, $initial);
     }
@@ -366,7 +378,10 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function slice(int $offset, ?int $length = null): static
+    public function slice(
+        int $offset,
+        ?int $length = null
+    ): static
     {
         return new static(array_slice($this->data, $offset, $length));
     }
@@ -400,7 +415,11 @@ trait ArrayListable
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function splice(int $offset = 0, int $length = 0, mixed ...$replacement): static
+    public function splice(
+        int $offset = 0,
+        int $length = 0,
+        mixed ...$replacement
+    ): static
     {
         $data = $this->data;
 
@@ -441,5 +460,4 @@ trait ArrayListable
     {
         return $this instanceof ReadonlyArrayList ? new ReadonlyArrayList($data) : new ArrayList($data);
     }
-
 }

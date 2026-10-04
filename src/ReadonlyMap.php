@@ -5,18 +5,20 @@ namespace Raxos\Collection;
 
 use ArrayIterator;
 use JsonSerializable;
-use Raxos\Contract\{DebuggableInterface, SerializableInterface};
 use Raxos\Contract\Collection\MapInterface;
+use Raxos\Contract\DebuggableInterface;
+use Raxos\Contract\SerializableInterface;
 use Traversable;
 use function array_key_exists;
 use function array_merge;
 use function count;
 
 /**
- * Class Map
+ * Class ReadonlyMap
  *
  * @template TValue
  * @implements MapInterface<TValue>
+ * @phpstan-consistent-constructor
  *
  * @author Bas Milius <bas@mili.us>
  * @package Raxos\Collection
@@ -24,7 +26,6 @@ use function count;
  */
 readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSerializable, SerializableInterface
 {
-
     /**
      * Map constructor.
      *
@@ -35,7 +36,9 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
      */
     public function __construct(
         protected array $data = []
-    ) {}
+    )
+    {
+    }
 
     /**
      * {@inheritdoc}
@@ -136,5 +139,4 @@ readonly class ReadonlyMap implements DebuggableInterface, MapInterface, JsonSer
     {
         $this->data = $data;
     }
-
 }

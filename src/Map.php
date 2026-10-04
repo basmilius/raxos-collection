@@ -5,14 +5,18 @@ namespace Raxos\Collection;
 
 use ArrayIterator;
 use JsonSerializable;
-use Raxos\Contract\{DebuggableInterface, SerializableInterface};
-use Raxos\Contract\Collection\{MapInterface, MutableMapInterface};
+use Raxos\Contract\Collection\MapInterface;
+use Raxos\Contract\Collection\MutableMapInterface;
+use Raxos\Contract\DebuggableInterface;
+use Raxos\Contract\SerializableInterface;
 use Traversable;
 use function array_key_exists;
 use function count;
 
 /**
  * Class Map
+ *
+ * Stores mutable string-keyed values with generic value and fallback types.
  *
  * @template TValue
  * @implements MapInterface<TValue>
@@ -24,7 +28,6 @@ use function count;
  */
 class Map implements DebuggableInterface, MapInterface, MutableMapInterface, JsonSerializable, SerializableInterface
 {
-
     /**
      * Map constructor.
      *
@@ -35,14 +38,24 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
      */
     public function __construct(
         protected array $data = []
-    ) {}
+    )
+    {
+    }
 
     /**
-     * {@inheritdoc}
+     * Returns the fallback for a missing key or a stored null; has() distinguishes those cases.
+     *
+     * @template TDefault
+     * @param string $key
+     * @param TDefault $default
+     * @return TValue|TDefault
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function get(string $key, mixed $default = null): mixed
+    public function get(
+        string $key,
+        mixed $default = null
+    ): mixed
     {
         return $this->data[$key] ?? $default;
     }
@@ -62,7 +75,10 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
      * @author Bas Milius <bas@mili.us>
      * @since 2.0.0
      */
-    public function set(string $key, mixed $value): void
+    public function set(
+        string $key,
+        mixed $value
+    ): void
     {
         $this->data[$key] = $value;
     }
@@ -162,5 +178,4 @@ class Map implements DebuggableInterface, MapInterface, MutableMapInterface, Jso
     {
         $this->data = $data;
     }
-
 }

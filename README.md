@@ -20,7 +20,7 @@ Ordered lists, keyed maps and pagination objects with iterable, array-access and
 Requires PHP 8.5 or later. Composer checks the remaining package and extension dependencies declared in [composer.json](composer.json).
 
 ```sh
-composer require "raxos/collection:^3.2"
+composer require "raxos/collection:^3.3"
 ```
 
 ## Usage
@@ -70,3 +70,5 @@ See [Testing Raxos](https://github.com/basmilius/raxos/blob/main/TESTING.md) for
 ## License
 
 [MIT](LICENSE). Copyright (c) 2017 - present Bas Milius.
+
+See [lazy sequences and cursor pages](https://raxos.dev/collection/lazy-sequences) for the optional APIs and their lifetime or transport guarantees.
